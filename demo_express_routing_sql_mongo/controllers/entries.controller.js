@@ -1,3 +1,9 @@
+/**
+ * @author Angel <angel´spage.com> 
+ * @exports controllers 
+ * @namespace controllers 
+ */
+
 const entry = require('../models/entries.model'); // Importar el modelo de la BBDD
 
 //getEntries
@@ -7,8 +13,18 @@ const entry = require('../models/entries.model'); // Importar el modelo de la BB
 //     busca todo
 
 
-// GET http://localhost:3000/entries --> ALL
-// GET http://localhost:3000/entries?email=hola@gmail.com --> por email
+  /**
+   * Descripción: Devuelve todas las entradas de la BBDD
+   * // GET http://localhost:3000/entries --> ALL
+   * // GET http://localhost:3000/entries?email=hola@gmail.com --> por email
+  * @memberof controllers 
+  * @method getEntries 
+  * @async 
+  * @param {Object} req petición HTTP
+  * @param {Object} res  respuesta HTTP
+  * @return {json} [] con las entries encontradas
+  * @throws {error}  Error en la búsqueda de las entries
+  */
 const getEntries = async (req, res) => {
     let entries;
     if (req.query.email) {

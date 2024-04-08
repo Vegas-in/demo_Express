@@ -1,14 +1,29 @@
+/**
+ * @author Angel <angel.com> 
+ * @exports entries
+ * @namespace SQLQueries 
+ */
+
 const { Pool } = require("pg");
 const queries = require("./queries"); // Queries SQL
 
 const pool = new Pool({
   host: "localhost",
   user: "postgres",
-  port: "5433",
+  port: "5432",
   database: "postgres",
-  password: "1234",
+  password: "123456",
 });
 
+/**
+  * Descripción de la función: Esta función busca todas las entries de cierto autor por email.
+  * @memberof SQLQueries 
+  * @method getEntriesByEmail 
+  * @async
+  * @param {String} email email del autor
+  * @return {Array} Devuelve las entries encontradas en un array []
+  * @throws {Error} Error de consulta a la BBDD
+  */
 // GET
 const getEntriesByEmail = async (email) => {
   let client, result;
@@ -25,6 +40,14 @@ const getEntriesByEmail = async (email) => {
   return result;
 };
 
+/**
+ * Descripción: Esta función devuelve todas las entries del sistema
+ * @memberof SQLQueries 
+ * @method getAllEntries 
+ * @async 
+ * @return {Array} Devuelve todas las entries en un array
+ * @throws {Error} Error de consulta a la BBDD
+ */
 // GET
 const getAllEntries = async () => {
   let client, result;
@@ -41,6 +64,34 @@ const getAllEntries = async () => {
   return result;
 };
 
+/**
+ * Descripción: Esta función crea una entry nueva
+ <pre>
+ * Ejemplo:
+ * {
+    title: "Se acabaron las mandarinas de TB",
+    content: "Corren rumores de que papa noel tenía un saco vacio y lo llenó",
+    email: "guillermu@thebridgeschool.es",
+    category: "sucesos"
+}
+ </pre>
+ * 
+ * 
+ * @memberof SQLQueries 
+ * @method createEntry 
+ * @async 
+ * @param {Object} entry nueva entry
+ <pre>
+{
+    title: "Se acabaron las mandarinas de TB",
+    content: "Corren rumores de que papa noel tenía un saco vacio y lo llenó",
+    email: "guillermu@thebridgeschool.es",
+    category: "sucesos"
+}
+</pre>
+ * @return {Object} Devuelve todas las entries en un array
+ * @throws {Error} Error de consulta a la BBDD
+ */
 // CREATE
 const createEntry = async (entry) => {
   const { title, content, email, category } = entry;

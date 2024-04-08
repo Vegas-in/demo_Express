@@ -1,6 +1,6 @@
 const router = require('express').Router(); // objeto de rutas
 const booksController = require('../controllers/books.controller.js'); // Importar el controlador. Representa el objeto con métodos que manejan las peticiones
-
+const checkApiKey = require("../middlewares/auth_api_key.js"); // Middleware para comprobar la API-KEY
 // CRUD --> CREATE, READ, UPDATE, DELETE
 
 // Params:
@@ -19,13 +19,13 @@ router.get("/:title?", booksController.getBook);
   "description": "en un lugar de la mancha..."
 }
 */
-// POST http://localhost:3000/api/books
-router.post("/", booksController.createBook);
+// POST http://localhost:3000/api/books?API_KEY=123abc
+router.post("/",checkApiKey, booksController.createBook);
 
-// PUT http://localhost:3000/api/books
-router.put("/",  booksController.editBook);
+// PUT http://localhost:3000/api/books?API_KEY=123abc
+router.put("/",checkApiKey,  booksController.editBook);
 
-// DELETE http://localhost:3000/api/books/quijote
-router.delete("/:title?", booksController.deleteBook);
+// DELETE http://localhost:3000/api/books/quijote?API_KEY=123abc
+router.delete("/:title?",checkApiKey, booksController.deleteBook);
 
 module.exports = router;

@@ -4,9 +4,9 @@ const queries = require("./queries"); // Queries SQL
 const pool = new Pool({
   host: "localhost",
   user: "postgres",
-  port: "5433",
+  port: "5432",
   database: "postgres",
-  password: "1234",
+  password: "123456",
 });
 
 // GET

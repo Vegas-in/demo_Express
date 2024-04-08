@@ -38,9 +38,18 @@ const createEntry = async (req, res) => {
     });
 }
 
+const updateEntry = async (req, res) => {
+    const newUpdate = req.body; // {title,content,email,category}
+    const response = await entry.editEntry(newEdit);
+    res.status(200).json({
+        "items_created": response,
+        data: Entry
+    });
+}
+
 module.exports = {
     getEntries,
     createEntry,
     //deleteEntry, --> DELETE
-    //updateEntry --> PUT
+    updateEntry
 }

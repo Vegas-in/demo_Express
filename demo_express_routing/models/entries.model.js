@@ -4,9 +4,9 @@ const queries = require('./queries') // Queries SQL
 const pool = new Pool({
     host: 'localhost',
     user: 'postgres',
-    port: '5433',
+    port: '5432',
     database: 'postgres',
-    password: '1234'
+    password: '123456'
   });
 
 // GET
@@ -61,13 +61,28 @@ const createEntry = async (entry) => {
 
 // DELETE
 //UPDATE
+const updateEntry = async (entry) => {
+    const { title, content, date, category, email, old_title } = entry;
+    let client, result;
+    try {
+        client = await pool.connect(); // Espera a abrir conexion
+        const data = await client.query(queries.updateEntry,[title, content, email, category])
+        result = data.rowCount
+    } catch (err) {
+        console.log(err);
+        throw err;
+    } finally {
+        client.release();
+    }
+    return result
+}
 
 const entries = {
     getEntriesByEmail,
     getAllEntries,
     createEntry,
     //deleteEntry
-    //updateEntry
+    updateEntry
 }
 
 module.exports = entries;
